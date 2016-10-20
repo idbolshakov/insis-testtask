@@ -84,11 +84,25 @@ class Database  {
      * отправляет запрос к базе
      *
      * @param $query - sql запрос в текстовом виде
-     * @return результат выполнения запроса
+     * @return результат выполнения запроса в json формате
      */
     public function query($query) {
 
-        return \mysql_query($query);
+        $result = \mysql_query($query);
+
+        return $this->getJsonFromMysqlQueryResult($result);
+    }
+
+    private function getJsonFromMysqlQueryResult($result) {
+
+        $rows = array();
+
+        while ($row = \mysql_fetch_assoc($result)) {
+
+            $rows[] = $row;
+        }
+
+        return \json_encode($rows);
     }
 }
 

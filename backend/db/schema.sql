@@ -44,8 +44,8 @@ CREATE TABLE payments (
     -- сумма платежа * 100 (чтобы избежать использования FLOAT типа)
     `summ` INT NOT NULL,
 
-    -- дата платежа (TIMESTAMP)
-    `date` INT,
+    -- дата платежа
+    `date` DATETIME,
 
     -- описание платежа
     `description` VARCHAR(255),

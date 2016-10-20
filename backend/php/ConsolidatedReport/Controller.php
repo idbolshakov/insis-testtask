@@ -15,5 +15,6 @@ namespace INSIS\TestTask\ConsolidatedReport;
  */
 class Controller {
 
+}
 
 ?>

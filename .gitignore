@@ -1,2 +1,5 @@
 # ignore vim swap files
 *.swp
+
+#ignore libreoffice temp files
+*.docx#

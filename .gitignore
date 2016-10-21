@@ -3,3 +3,6 @@
 
 #ignore libreoffice temp files
 *.docx#
+
+#ignore node_modules folder
+*/node_modules/

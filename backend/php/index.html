@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="styles.css">
+
+        <title>Сводный отчет</title>
+    </head>
+
+    <body>
+
+        <div class="configure-block">
+
+            <h1>Сводный отчет</h1>
+
+            <label>
+
+                <span>Месяц:</span><br>
+
+                <select id="month_input">
+                    <option checked>Январь</option>
+                    <option>Февраль</option>
+                    <option>Март</option>
+                    <option>Апрель</option>
+                    <option>Май</option>
+                    <option>Июнь</option>
+                    <option>Июль</option>
+                    <option>Август</option>
+                    <option>Сентябрь</option>
+                    <option>Октябрь</option>
+                    <option>Ноябрь</option>
+                    <option>Декабрь</option>
+                </select>
+
+            </label>
+
+            <label>
+
+                <span>Год:</span><br>
+
+                <input type="text" placeholder="YYYY" size="4" id="year_input">
+
+            </label>
+
+            <label>
+
+                <span>Тип клиента:</span><br>
+
+                <label>
+                    <input type="radio" name="client_type" id="client_type_0"
+                    value="0" checked> Неважно
+                </label>
+
+                <label>
+                    <input type="radio" name="client_type" id="client_type_1" value="1"> Физ. Лицо
+                </label>
+
+                <label>
+                    <input type="radio" name="client_type" id="client_type_2" value="2"> Юр. Лицо
+                </label>
+            </label>
+
+            <button type="button" id="show_button">Смотреть</button>
+        </div>
+
+        <div class="report-block" id="report_block"> 
+        </div>
+
+        <script src="scripts.js"></script>
+    </body>
+</html>

@@ -46,7 +46,8 @@ class Controller {
     }
 
     private function validateConfig($reportConfig) {
-return true;
+        
+        return true;
     }
 }
 

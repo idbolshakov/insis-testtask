@@ -10,9 +10,5 @@ default:
 		 src/js/view.js\
 		 src/js/controller.js\
 		 src/js/app.js\
-		 > build/scripts.js;
-		 
-	@cp build/index.html /var/www/html/insis/index.html;
-	@cp build/styles.css /var/www/html/insis/styles.css;	
-	@cp build/scripts.js /var/www/html/insis/scripts.js;		 
+		 > build/scripts.js;	 
 

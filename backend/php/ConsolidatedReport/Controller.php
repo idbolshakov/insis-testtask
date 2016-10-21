@@ -42,12 +42,22 @@ class Controller {
 
     private function parseReportConfig() {
 
-        return \json_decode($_GET['reportConfig']);
+        return \json_decode($_GET['reportConfig'], true);
     }
 
     private function validateConfig($reportConfig) {
         
-        return true;
+        if (
+			\DateTime::createFromFormat('Y-m-d H:i:s', $reportConfig['start_date']) &&
+			\DateTime::createFromFormat('Y-m-d H:i:s', $reportConfig['end_date']) &&
+			$reportConfig['client_type'] >= 0 && 
+			$reportConfig['client_type'] <= 2
+		) {
+			
+			return true;
+		}
+
+		return false;
     }
 }
 

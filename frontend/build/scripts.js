@@ -6,6 +6,7 @@ var CONSOLIDATED_REPORT = {
 };
 CONSOLIDATED_REPORT.model = {
 	
+	// адрес скрипта, на который будем слать запрос
 	requestURL: "ConsolidatedReport.php",
 	
 	startDate: null,
@@ -165,11 +166,6 @@ CONSOLIDATED_REPORT.model = {
 				}
 			}
 		};
-		
-		var parseReportData = function() {
-			
-			alert(this.reportData);
-		}
 	},
 	
 	/**
@@ -179,7 +175,7 @@ CONSOLIDATED_REPORT.model = {
 	 */
 	getRequestParams: function() {
 		
-		return this.requestURL + "?reportConfig='" + this.reportConfig + "'";
+		return this.requestURL + "?reportConfig=" + this.reportConfig;
 	},
 	
 	/**
@@ -204,27 +200,36 @@ CONSOLIDATED_REPORT.model = {
 				
 				data[i].begin_balance = 0;
 			};	
+			data[i].begin_balance /= 100;
+			data[i].begin_balance = data[i].begin_balance.toFixed(2);
 			
 			// приход
 			if (data[i].income === null) {
 				
 				data[i].income = 0;
 			};
+			data[i].income /= 100;
+			data[i].income = data[i].income.toFixed(2);			
 			
 			// рахсод
 			if (data[i].consumption === null) {
 				
 				data[i].consumption = 0;
 			};	
+			data[i].consumption /= 100;
+			data[i].consumption = data[i].consumption.toFixed(2);			
 			
 			// перерасчет
 			if (data[i].recalculation === null) {
 				
 				data[i].recalculation = 0;
 			};	
+			data[i].recalculation /= 100;
+			data[i].recalculation = data[i].recalculation.toFixed(2);			
 			
 			// итого
-			data[i].total = data[i].begin_balance + data[i].income - data[i].consumption;									
+			data[i].total = +data[i].begin_balance + +data[i].income - +data[i].consumption;	
+			data[i].total = data[i].total.toFixed(2);
 		}
 		
 		this.reportData = data;

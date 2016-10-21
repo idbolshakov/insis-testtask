@@ -38,9 +38,11 @@ class Model {
 
     private function generateSqlQuery($queryConfig) {
 
-        $start_date               = $queryConfig['start_date'];
-        $end_date                 = $queryConfig['end_date'];
-        $recalculation_payment_id = 3;
+        $start_date                     = $queryConfig['start_date'];
+        $end_date                       = $queryConfig['end_date'];
+        $recalculation_payment_id       = 3;
+        $add_client_type_filter_if_need = $this->generateClientTypeFilterIfNeed($queryConfig['client_type']);
+        $add_clients_table_if_need = $add_client_type_filter_if_need == '' ? '' : ', clients' ;
 
         return "
             
@@ -62,23 +64,29 @@ class Model {
                     SUM(summ)
                  FROM
                     payments
+                    $add_clients_table_if_need
                 WHERE 
                     date > '$start_date' AND 
                     date < '$end_date' AND 
                     summ > 0 AND
                     offer_id = current_offer_id
-
+                     
+                    $add_client_type_filter_if_need
+                    
                 ) as income,
 
                 (SELECT
                     ABS(SUM(summ))
                  FROM
                     payments
+                    $add_clients_table_if_need
                  WHERE
                     date > '$start_date' AND 
                     date < '$end_date' AND
                     summ < 0 AND
                     offer_id = current_offer_id
+                    
+                     $add_client_type_filter_if_need
 
                 ) as consumption,
 
@@ -86,11 +94,14 @@ class Model {
                     SUM(summ)
                  FROM
                     payments
+                    $add_clients_table_if_need
                  WHERE
                     date > '$start_date' AND 
                     date < '$end_date' AND
                     payment_type_id = '$recalculation_payment_id' AND
                     offer_id = current_offer_id
+                    
+                    $add_client_type_filter_if_need
 
                 ) as recalculation
             
@@ -99,6 +110,16 @@ class Model {
                 offers;
         ";
     }
+    
+    private function generateClientTypeFilterIfNeed($clientTypeId) {
+		
+		if ($clientTypeId > 0) {
+			
+			return " AND clients.id = payments.client_id AND clients.type = '$clientTypeId'";
+		}
+		
+		return '';
+	}
 }
 
 ?>
